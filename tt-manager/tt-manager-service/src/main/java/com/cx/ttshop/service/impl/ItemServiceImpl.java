@@ -13,8 +13,8 @@ public class ItemServiceImpl implements ItemService {
     private TbItemMapper map;
 
     @Override
-    public TbItem getById(Long ItemId) {
-        TbItem item = map.selectByPrimaryKey(ItemId);
+    public TbItem getById(Long itemId) {
+        TbItem item = map.selectByPrimaryKey(itemId);
         return item;
     }
 }
