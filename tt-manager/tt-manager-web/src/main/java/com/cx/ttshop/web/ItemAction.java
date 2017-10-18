@@ -1,5 +1,7 @@
 package com.cx.ttshop.web;
 
+import com.cx.common.dto.Page;
+import com.cx.common.dto.Result;
 import com.cx.ttshop.pojo.po.TbItem;
 import com.cx.ttshop.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 @Scope("prototype")
@@ -26,4 +30,15 @@ public class ItemAction {
         return tbItem;
     }
 
+//    @RequestMapping("/items")
+//    @ResponseBody
+//    public List<TbItem> itemList(){
+//        return service.itemList();
+//    }
+
+    @ResponseBody
+    @RequestMapping(value = "/items",method = RequestMethod.POST)
+    public Result<TbItem> itemsList(Page page){
+        return service.itemListByPage(page);
+    }
 }

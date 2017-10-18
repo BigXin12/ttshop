@@ -55,11 +55,28 @@
 <script>
     ttshop.registerMenuEvent();
 </script>
-<script>
-    $(function(){
-        var a = 1;
-        var b = 2;
-    });
-</script>
+
+<%--<script>--%>
+    <%--$("#menu .easyui-tree").tree({--%>
+
+        <%--onClick:function(node){--%>
+            <%--var title = node.text;--%>
+            <%--var href = node.attributes.href;--%>
+
+            <%--if($('#tab').tabs('exists',title)){--%>
+                <%--$('#tab').tabs('select',title)--%>
+            <%--}else{--%>
+                <%--$('#tab').tabs('add', {--%>
+                    <%--title: title,--%>
+                    <%--href: href,--%>
+                    <%--closable: true--%>
+                <%--});--%>
+            <%--}--%>
+
+        <%--}--%>
+    <%--});--%>
+<%--</script>--%>
+
+
 </body>
 </html>
