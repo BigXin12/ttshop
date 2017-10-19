@@ -10,4 +10,6 @@ import java.util.List;
 public interface ItemService {
     TbItem getById(Long itemId);
     Result<TbItemCustom> listItemByPage(Page page);
+    int updateItemsByIds(byte b,List<Long> ids);
+
 }

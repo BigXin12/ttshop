@@ -8,10 +8,9 @@ import com.cx.ttshop.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @Scope("prototype")
@@ -34,6 +33,36 @@ public class ItemAction {
     @RequestMapping(value = "/items")
     public Result<TbItemCustom> itemsList(Page page){
         return service.listItemByPage(page);
+    }
+
+
+    /**
+     * 批量删除商品
+     * @param ids
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/item/batch",method = RequestMethod.POST)
+    public int batchRemoveItem(@RequestParam("ids[]") List<Long> ids){
+        return service.updateItemsByIds((byte)3,ids);
+    }
+
+    /**
+     * 批量上架商品
+     */
+    @ResponseBody
+    @RequestMapping(value = "/item/up",method = RequestMethod.POST)
+    public int batchUpItem(@RequestParam("ids[]") List<Long> ids){
+        return service.updateItemsByIds((byte)1,ids);
+    }
+
+    /**
+     * 批量下架商品
+     */
+    @ResponseBody
+    @RequestMapping(value = "/item/down",method = RequestMethod.POST)
+    public int batchDownItem(@RequestParam("ids[]") List<Long> ids){
+        return service.updateItemsByIds((byte)2,ids);
     }
 
 }

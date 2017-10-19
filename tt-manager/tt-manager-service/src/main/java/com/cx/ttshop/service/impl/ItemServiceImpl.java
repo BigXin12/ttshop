@@ -5,6 +5,7 @@ import com.cx.common.dto.Result;
 import com.cx.ttshop.dao.TbItemMapper;
 import com.cx.ttshop.dao.TbItemMapperCustom;
 import com.cx.ttshop.pojo.po.TbItem;
+import com.cx.ttshop.pojo.po.TbItemExample;
 import com.cx.ttshop.pojo.vo.TbItemCustom;
 import com.cx.ttshop.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,15 @@ public class ItemServiceImpl implements ItemService {
         result.setTotal(count);
 
         return result;
+    }
+
+    @Override
+    public int updateItemsByIds(byte b,List<Long> ids) {
+        TbItem record  = new TbItem();
+        record.setStatus(b);
+        TbItemExample example = new TbItemExample();
+        TbItemExample.Criteria criteria = example.createCriteria();
+        criteria.andIdIn(ids);
+        return map.updateByExampleSelective(record,example);
     }
 }
