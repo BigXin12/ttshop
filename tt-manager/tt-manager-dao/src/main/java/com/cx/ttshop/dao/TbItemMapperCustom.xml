@@ -2,33 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cx.ttshop.dao.TbItemMapperCustom" >
 
-    <resultMap id="BaseResultMap" type="com.cx.ttshop.pojo.po.TbItem" >
-        <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="title" property="title" jdbcType="VARCHAR" />
-        <result column="sell_point" property="sellPoint" jdbcType="VARCHAR" />
-        <result column="price" property="price" jdbcType="BIGINT" />
-        <result column="num" property="num" jdbcType="INTEGER" />
-        <result column="barcode" property="barcode" jdbcType="VARCHAR" />
-        <result column="image" property="image" jdbcType="VARCHAR" />
-        <result column="cid" property="cid" jdbcType="BIGINT" />
-        <result column="status" property="status" jdbcType="TINYINT" />
-        <result column="created" property="created" jdbcType="TIMESTAMP" />
-        <result column="updated" property="updated" jdbcType="TIMESTAMP" />
-    </resultMap>
-
-  <sql id="Base_Column_List" >
-    id, title, sell_point, price, num, barcode, image, cid, status, created, updated
-  </sql>
-
-  <select id="selectByPage" resultMap="BaseResultMap">
-      select 
-      <include refid="Base_Column_List"/>
-      FROM tb_item
-      limit #{offset},#{rows}
-  </select>
-
     <select id="countItems" resultType="long">
         SELECT  COUNT(*) AS total FROM tb_item
     </select>
 
+    <sql id="Base_Column_List" >
+         i.id, i.title, i.sell_point as sellPoint,
+         i.price, i.num, i.barcode, i.image, i.cid,
+         i.status, i.created, i.updated,c.name as catName,
+          CASE i.status
+	    	WHEN 1 THEN "正常"
+	    	WHEN 2 THEN "下架"
+	    	WHEN 3 THEN "删除"
+	    	ELSE "未知" END as statusName
+    </sql>
+
+    <select id="listItemByPage" parameterType="com.cx.common.dto.Page" resultType="com.cx.ttshop.pojo.vo.TbItemCustom">
+        select
+        <include refid="Base_Column_List"/>
+        FROM
+        tb_item i
+        left join tb_item_cat c
+        on i.cid = c.id
+        limit #{offset},#{rows}
+    </select>
 </mapper>
