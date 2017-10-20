@@ -1,5 +1,6 @@
 package com.cx.ttshop.web;
 
+import com.cx.common.dto.Order;
 import com.cx.common.dto.Page;
 import com.cx.common.dto.Result;
 import com.cx.ttshop.pojo.po.TbItem;
@@ -28,11 +29,15 @@ public class ItemAction {
         return tbItem;
     }
 
-
+    /**
+     * 展示商品列表
+     * @param page
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/items")
-    public Result<TbItemCustom> itemsList(Page page){
-        return service.listItemByPage(page);
+    public Result<TbItemCustom> itemsList(Page page, Order order){
+        return service.listItemByPage(page,order);
     }
 
 

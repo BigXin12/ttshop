@@ -7,6 +7,16 @@ public class TbItemCustom extends TbItem {
 
     private String statusName;
 
+    private String priceView;
+
+    public String getPriceView() {
+        return priceView;
+    }
+
+    public void setPriceView(String priceView) {
+        this.priceView = priceView;
+    }
+
     public String getCatName() {
         return catName;
     }

@@ -19,12 +19,12 @@ public class TbItemMapperCustomTest {
 
     @Test
     public void listItemByPage() throws Exception {
-        Page page = new Page();
-        page.setPage(1);
-        page.setRows(10);
-        List<TbItemCustom> list = tbItemMapperCustom.listItemByPage(page);
-
-        System.out.println(list.size());
+//        Page page = new Page();
+//        page.setPage(1);
+//        page.setRows(10);
+//        List<TbItemCustom> list = tbItemMapperCustom.listItemByPage(page);
+//
+//        System.out.println(list.size());
     }
 
 }

@@ -5,11 +5,12 @@ import com.cx.ttshop.pojo.po.TbItem;
 import com.cx.ttshop.pojo.vo.TbItemCustom;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TbItemMapperCustom{
     //分页查询
 
    long countItems();
-   List<TbItemCustom> listItemByPage(Page page);
+   List<TbItemCustom> listItemByPage(Map<String,Object> map);
 
 }

@@ -5,6 +5,14 @@
 
     var toolbar =[
         {
+            id:"search",
+            text:"搜索",
+            iconCls:"icon-search",
+            handler:function () {
+                console.log("搜索");
+            }
+        },
+        {
             iconCls: 'icon-add',
             text: "新增",
             handler: function () {
@@ -116,17 +124,25 @@
     }];
 
     $("#list").datagrid({
+        multiSort:true,
         toolbar:toolbar,
         fit:true,
         pagination:true,
         url:"items",
         columns:[[
             {field:"check",checkbox:true},
-            {field:"id",title:"商品编号",width:100},
-            {field:"title",title:"商品名称",width:300},
-            {field:"sellPoint",title:"卖点",width:300},
-            {field:"catName",title:"类别",width:100},
-            {field:"statusName",title:"状态",width:100}
+            {field:"id",title:"商品编号",width:100,sortable:true},
+            {field:"title",title:"商品名称",width:200,sortable:true},
+            {field:"sellPoint",title:"卖点",width:200},
+            {field:"catName",title:"类别",width:50},
+            {field:"statusName",title:"状态",width:50},
+            {field:"created",title:"创建时间",width:150,formatter:function(value,row,index){
+                return moment(value).format('lll')
+            }},
+            {field:"updated",title:"更新时间",width:150,formatter:function(value,row,index){
+                return moment(value).format('lll')
+            }},
+            {field:"priceView",title:"价格",width:50}
         ]]
 
     });
