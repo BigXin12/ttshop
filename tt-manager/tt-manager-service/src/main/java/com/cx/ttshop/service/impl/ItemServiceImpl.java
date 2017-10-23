@@ -8,6 +8,7 @@ import com.cx.ttshop.dao.TbItemMapperCustom;
 import com.cx.ttshop.pojo.po.TbItem;
 import com.cx.ttshop.pojo.po.TbItemExample;
 import com.cx.ttshop.pojo.vo.TbItemCustom;
+import com.cx.ttshop.pojo.vo.TbItemQuery;
 import com.cx.ttshop.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,13 +32,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Result<TbItemCustom> listItemByPage(Page page,Order order) {
+    public Result<TbItemCustom> listItemByPage(Page page,Order order,TbItemQuery query) {
         Map<String,Object> m = new HashMap<String,Object>();
         m.put("page",page);
         m.put("order",order);
-
+        m.put("query",query);
         List<TbItemCustom> list = map2.listItemByPage(m);
-        long count = map2.countItems();
+        long count = map2.countItems(m);
 
         Result<TbItemCustom> result = new Result<TbItemCustom>();
         result.setRows(list);

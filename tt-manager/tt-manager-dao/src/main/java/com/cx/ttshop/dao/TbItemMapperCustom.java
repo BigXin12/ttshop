@@ -10,7 +10,7 @@ import java.util.Map;
 public interface TbItemMapperCustom{
     //分页查询
 
-   long countItems();
+   long countItems(Map<String,Object> map);
    List<TbItemCustom> listItemByPage(Map<String,Object> map);
 
 }
