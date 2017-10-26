@@ -82,13 +82,25 @@
            //提交到后台动作的额URL地址
             url:'item',
             onSubmit:function(){
+                $('#price').val($('#priceView').val()*100);
                 return $(this).form('validate');
             },
-            success:function(){
+            //表单提交后触发
+            success:function(data){
                 console.log("成功");
+                if(data>0){
+                    $.messager.alert('消息','保存成功','info');
+                    ttshop.addTab('查询商品','item-list');
+                    ttshop.closeTab('新增商品')
+                };
             }
         });
     };
+
+    function clearForm(){
+        $('#itemAddForm').form('reset');
+        ue.setContent('商品描述');
+    }
 
     $("#cid").combotree({
         url:'itemCats?parentId=0',

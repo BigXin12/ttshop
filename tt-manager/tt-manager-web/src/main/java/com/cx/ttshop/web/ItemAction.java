@@ -71,4 +71,14 @@ public class ItemAction {
         return service.updateItemsByIds((byte)2,ids);
     }
 
+    /**
+     * 保存商品
+     */
+    @ResponseBody
+    @RequestMapping("item")
+    public int saveItem(TbItem tbItem,String desc){
+        return service.saveItem(tbItem,desc);
+    }
+
+
 }

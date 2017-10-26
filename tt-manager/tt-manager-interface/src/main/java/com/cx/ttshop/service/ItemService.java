@@ -13,5 +13,5 @@ public interface ItemService {
     TbItem getById(Long itemId);
     Result<TbItemCustom> listItemByPage(Page page, Order order, TbItemQuery query);
     int updateItemsByIds(byte b,List<Long> ids);
-
+    int saveItem(TbItem tbItem,String desc);
 }

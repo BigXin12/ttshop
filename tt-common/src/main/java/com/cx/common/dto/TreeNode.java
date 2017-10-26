@@ -1,5 +1,12 @@
 package com.cx.common.dto;
 
+/**
+ * User: DHC
+ * Date: 2017/10/24
+ * Time: 9:58
+ * Version:V1.0
+ * 树节点结构实体类
+ */
 public class TreeNode {
     private Long id;
     private String text;

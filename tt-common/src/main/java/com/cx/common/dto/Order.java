@@ -3,26 +3,16 @@ package com.cx.common.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * User: DHC
+ * Date: 2017/10/20
+ * Time: 14:25
+ * Version:V1.0
+ * datagrid排序实体类
+ */
 public class Order {
     private String sort;
     private String order;
-    private String orderParams;
-
-    public void setOrderParams(String orderParams) {
-        this.orderParams = orderParams;
-    }
-
-    public List<String> getOrderParams() {
-        String[] sort = this.sort.split(",");
-        String[] order = this.order.split(",");
-        List<String> list = new ArrayList<String>();
-        for(int i=0;i<sort.length;i++){
-            String temp = sort[i]+" "+order[i];
-            list.add(temp);
-        }
-        return list;
-    }
-
 
     public String getSort() {
         return sort;
@@ -38,5 +28,16 @@ public class Order {
 
     public void setOrder(String order) {
         this.order = order;
+    }
+
+    public List<String> getOrderParams() {
+        String[] sorts = this.sort.split(",");//id,title
+        String[] orders = this.order.split(",");//asc,desc
+        List<String> list = new ArrayList<String>();
+        for (int i=0;i<sorts.length;i++){
+            String temp = sorts[i] +" "+orders[i];//id asc;title desc
+            list.add(temp);//[id asc;title desc]
+        }
+        return list;
     }
 }

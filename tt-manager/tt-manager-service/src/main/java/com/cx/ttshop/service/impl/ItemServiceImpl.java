@@ -3,16 +3,22 @@ package com.cx.ttshop.service.impl;
 import com.cx.common.dto.Order;
 import com.cx.common.dto.Page;
 import com.cx.common.dto.Result;
+import com.cx.common.utils.IDUtils;
+import com.cx.ttshop.dao.TbItemDescMapper;
 import com.cx.ttshop.dao.TbItemMapper;
 import com.cx.ttshop.dao.TbItemMapperCustom;
 import com.cx.ttshop.pojo.po.TbItem;
+import com.cx.ttshop.pojo.po.TbItemDesc;
+import com.cx.ttshop.pojo.po.TbItemDescExample;
 import com.cx.ttshop.pojo.po.TbItemExample;
 import com.cx.ttshop.pojo.vo.TbItemCustom;
 import com.cx.ttshop.pojo.vo.TbItemQuery;
 import com.cx.ttshop.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +30,8 @@ public class ItemServiceImpl implements ItemService {
     private TbItemMapper map;
     @Autowired
     private TbItemMapperCustom map2;
+    @Autowired
+    private TbItemDescMapper tbItemDescMapper;
 
     @Override
     public TbItem getById(Long itemId) {
@@ -55,5 +63,25 @@ public class ItemServiceImpl implements ItemService {
         TbItemExample.Criteria criteria = example.createCriteria();
         criteria.andIdIn(ids);
         return map.updateByExampleSelective(record,example);
+    }
+
+    @Override
+    @Transactional
+    public int saveItem(TbItem tbItem, String desc) {
+        long id = IDUtils.getItemId();
+        tbItem.setId(id);
+        tbItem.setStatus((byte)1);
+        tbItem.setCreated(new Date());
+        tbItem.setUpdated(new Date());
+        int count = map.insert(tbItem);
+
+        TbItemDesc tbItemDesc = new TbItemDesc();
+        tbItemDesc.setItemId(id);
+        tbItemDesc.setItemDesc(desc);
+        tbItemDesc.setCreated(new Date());
+        tbItemDesc.setUpdated(new Date());
+        count += tbItemDescMapper.insert(tbItemDesc);
+
+        return count;
     }
 }
