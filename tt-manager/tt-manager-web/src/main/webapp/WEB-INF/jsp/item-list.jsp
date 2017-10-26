@@ -23,7 +23,6 @@
         <button onclick="up()" class="easyui-linkbutton" data-options="iconCls:'icon-up',plain:true">上架</button>
     </div>
 </div>
-<table id="table"></table>
 
 <table id="list"></table>
 <script>
@@ -37,7 +36,7 @@
     
     
     function add(){
-        console.log("新增");
+        ttshop.addTab('新增商品','item-add');
     }
     function edit() {
         console.log("编辑");

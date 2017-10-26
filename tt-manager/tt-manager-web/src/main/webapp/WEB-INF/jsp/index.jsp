@@ -62,6 +62,13 @@
     ttshop.registerMenuEvent();
 </script>
 
+<%--富文本编辑器--%>
+<%--配置文件--%>
+<script src="js/ueditor/ueditor.config.js"></script>
+<%--编辑器源码文件--%>
+<script src="js/ueditor/ueditor.all.js"></script>
+
+
 <%--<script>--%>
     <%--$("#menu .easyui-tree").tree({--%>
 
