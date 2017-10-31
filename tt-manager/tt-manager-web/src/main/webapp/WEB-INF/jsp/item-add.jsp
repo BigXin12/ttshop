@@ -75,48 +75,54 @@
 </div>
 
 <script>
-    var ue = UE.getEditor("container");
+    //    var ue = UE.getEditor("container");
+    var ue = UE.getEditor('container', {
+        initialFrameWidth: '100%',
+        initialFrameHeight: '300',
+        serverUrl: 'file/upload'
+    });
 
-    function submitForm(){
-        $("#itemAddForm").form('submit',{
-           //提交到后台动作的额URL地址
-            url:'item',
-            onSubmit:function(){
-                $('#price').val($('#priceView').val()*100);
+    function submitForm() {
+        $("#itemAddForm").form('submit', {
+            //提交到后台动作的额URL地址
+            url: 'item',
+            onSubmit: function () {
+                $('#price').val($('#priceView').val() * 100);
                 return $(this).form('validate');
             },
             //表单提交后触发
-            success:function(data){
+            success: function (data) {
                 console.log("成功");
-                if(data>0){
-                    $.messager.alert('消息','保存成功','info');
-                    ttshop.addTab('查询商品','item-list');
+                if (data > 0) {
+                    $.messager.alert('消息', '保存成功', 'info');
+                    ttshop.addTab('查询商品', 'item-list');
                     ttshop.closeTab('新增商品')
-                };
+                }
+                ;
             }
         });
     };
 
-    function clearForm(){
+    function clearForm() {
         $('#itemAddForm').form('reset');
         ue.setContent('商品描述');
     }
 
     $("#cid").combotree({
-        url:'itemCats?parentId=0',
-        required:true,
-        onBeforeExpand:function (node) {
+        url: 'itemCats?parentId=0',
+        required: true,
+        onBeforeExpand: function (node) {
             //获取当前被点击的tree
             var $currentTree = $('#cid').combotree('tree');
             //调用easyui tree组件的options方法
             var option = $currentTree.tree('options');
             //修改options的URL属性
-            option.url = 'itemCats?parentId='+node.id;
+            option.url = 'itemCats?parentId=' + node.id;
         },
-        onBeforeSelect:function (node) {
-            var isLeaf = $('#cid').tree('isLeaf',node.target);
-            if(!isLeaf){
-                $.messager.alert('警告','请选择最终类目','warning');
+        onBeforeSelect: function (node) {
+            var isLeaf = $('#cid').tree('isLeaf', node.target);
+            if (!isLeaf) {
+                $.messager.alert('警告', '请选择最终类目', 'warning');
                 return false;
             }
         }

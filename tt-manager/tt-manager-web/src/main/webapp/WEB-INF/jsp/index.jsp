@@ -68,6 +68,17 @@
 <%--编辑器源码文件--%>
 <script src="js/ueditor/ueditor.all.js"></script>
 
+<script>
+    UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+    UE.Editor.prototype.getActionUrl = function(action) {
+        if (action == 'uploadimage') {
+            return 'http://localhost:8080/ttshop/file/upload';
+        }else {
+            return this._bkGetActionUrl.call(this, action);
+        }
+    }
+</script>
+
 
 <%--<script>--%>
     <%--$("#menu .easyui-tree").tree({--%>

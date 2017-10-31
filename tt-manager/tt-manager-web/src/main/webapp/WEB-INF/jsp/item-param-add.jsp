@@ -137,7 +137,6 @@
             if (data > 0) {
                 ttshop.closeTab('规格参数');
                 ttshop.addTab('规格参数', 'item-param-list');
-
             }
         });
     }
